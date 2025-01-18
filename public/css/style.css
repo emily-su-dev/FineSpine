@@ -1,0 +1,143 @@
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+}
+/*header*/
+.logo {
+    font-size: 0.9rem;
+    color: black;
+    font-weight: bold;
+    font-family: "Unbounded", serif;
+    text-align: left;
+    }
+
+    .logo a {
+    text-decoration: none; 
+    color: inherit; 
+    font-size: inherit; 
+    }
+
+.logotext {
+    font-size: 2.5rem;
+    color: darkgreen;
+    font-weight: bold;
+    font-family: "Unbounded", serif;
+    text-align: left;
+    }
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.login-btn {
+    font-family: "Raleway", serif;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.login-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.getstarted-btn {
+    font-family: "Raleway", serif;
+    background-color: black;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.getstarted-btn:hover {
+    background-color: grey;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 40px 60px;
+    align-items: left;
+    text-align: left;
+}
+
+.main-container {
+    display: flex;
+    height: calc(85vh - 100px);
+    padding: 40px 60px;
+    gap: 20px;
+}
+
+/* Left Content */
+.left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.left-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.left-content h2 {
+    font-size: 1.5rem;
+    opacity: 70%;
+    margin-bottom: 10px;
+}
+
+.left-content p {
+    font-size: 1.1rem;
+}
+
+.get-started-btn {
+    font-family: "Raleway", serif;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 30px;
+}
+
+.get-started-btn:hover {
+    background-color: darkgreen;
+}
+
+
+/* Right Content */
+.right-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f4f4; 
+    border-left: 2px solid #ddd;
+}
+
+.placeholder {
+    text-align: center;
+    border-radius: 5px;
+}
