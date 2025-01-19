@@ -18,8 +18,8 @@
             <button onclick="location.href='webcam.html'" class="webcam-btn">Webcam</button>
 
             <div class="btn-group">
-                <button onclick="location.href='login.html'" class="login-btn">Log In</button>
-                <button onclick="location.href='getstarted.html'" class="getstarted-btn">Get Started</button>
+                <button class="login-btn" id="login">Log In</button>
+                <button class="logout-btn" id="logout">Log Out</button>
             </div>
         </div>
     </header>
@@ -31,8 +31,8 @@
             <h2>where we fix your posture and unlock your mind</h2>
             <br>
             <br>
-            <p>Your AI-powered posture coach for a healthier, productive life.</p>
-            <button onclick="location.href='getstarted.html'" class="get-started-btn">Get Started</button>
+            <p>Your AI-powered posture coach for a healthier, productive life</p>
+            <button class="login-btn get-started-btn" id="start">Get Started</button>
         </div>
         
         <div class="right-content">
@@ -42,4 +42,6 @@
         </div>
     </div>
 
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <script type="module" src="auth.js"></script>
 </body>
