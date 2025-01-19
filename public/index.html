@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fine Spine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>FineSpine</title>
 </head>
+
 <body>
-    <h1>Welcome to Fine Spine!</h1>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
-    <script type="module" src="app.js"></script>
+    <header>
+        <div class="container header-container">
+            <h1 class="logo">FineSpine</h1>
+            <button onclick="location.href='webcam.html'" class="webcam-btn">Webcam</button>
+
+            <div class="btn-group">
+                <button onclick="location.href='login.html'" class="login-btn">Log In</button>
+                <button onclick="location.href='getstarted.html'" class="getstarted-btn">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Left Content -->
+        <div class="left-content">
+            <h1>Welcome to <span class="logotext">FineSpine</span>,</h1> 
+            <h2>where we fix your posture and unlock your mind</h2>
+            <br>
+            <br>
+            <p>Your AI-powered posture coach for a healthier, productive life.</p>
+            <button onclick="location.href='getstarted.html'" class="get-started-btn">Get Started</button>
+        </div>
+        
+        <div class="right-content">
+            <div class="placeholder">
+                <p>Insert demo video</p>
+            </div>
+        </div>
+    </div>
 
 </body>
-</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <title>Sign Up</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Raleway", serif;
+                background: #f9f9f9;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            header {
+            position: absolute; 
+            top: 0;
+            left: 0;
+            width: 100%; 
+            display: flex;
+            align-items: flex-start; 
+            padding: 35px 60px;
+            background-color: transparent; 
+            }
+
+            .logo {
+            font-size: 0.9rem;
+            color: black;
+            font-weight: bold;
+            font-family: "Unbounded", serif;
+            text-align: left;
+            }
+
+            .logo a {
+            text-decoration: none; 
+            color: inherit; 
+            font-size: inherit; 
+            }
+
+            .signup-container {
+                width: 350px;
+                padding: 30px;
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+    
+            .signup-container h1 {
+                font-family: "Unbounded", serif;
+                margin-bottom: 20px;
+                font-size: 1.5rem;
+                color: #333;
+                text-align: center;
+            }
+    
+            .signup-container p {
+                font-size: 0.8rem;
+                color: #666;
+                margin-bottom: 20px;
+            }
+    
+            .signup-container form {
+                display: flex;
+                flex-direction: column;
+            }
+    
+            .signup-container label {
+                font-size: 0.8rem;
+                color: #333;
+                font-weight: bold;
+            }
+    
+            .signup-container input {
+                margin-bottom: 15px;
+                padding: 10px;
+                font-size: 0.9rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+    
+            .signup-container input[type="checkbox"] {
+                margin-right: 10px;
+            }
+    
+            .signup-container .terms {
+                display: flex;
+                align-items: center;
+                font-size: 0.9rem;
+                color: #333;
+                margin-bottom: 15px;
+            }
+    
+            .signup-container button {
+                font-family: "Raleway", serif;
+                background-color: #4caf50;
+                color: white;
+                border: none;
+                padding: 10px;
+                font-size: 1rem;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+    
+            .signup-container button:hover {
+                background-color: #45a049;
+            }
+    
+            .signup-container .note {
+                font-size: 0.8rem;
+                color: #666;
+                margin-top: 15px;
+                text-align: center;
+            }
+    
+            .signup-container .note a {
+                color: #4caf50;
+                text-decoration: none;
+            }
+    
+            .signup-container .note a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="container header-container">
+                <h1 class="logo">
+                    <a href="index.html">FineSpine</a>
+                </h1>
+            </div>
+        </header>
+
+        <div class="signup-container">
+            <h1>Sign Up</h1>
+            <p>* indicates required field</p>
+            <form action="#" method="POST" onsubmit="return validateForm()">
+                <label for="first-name">* First name</label>
+                <input type="text" id="first-name" name="first-name" required>
+    
+                <label for="last-name">* Last name</label>
+                <input type="text" id="last-name" name="last-name" required>
+    
+                <label for="email">* Email address</label>
+                <input type="email" id="email" name="email" required>
+    
+                <label for="password">* Password</label>
+                <input type="password" id="password" name="password" placeholder="Create a password 8-25 characters long" required>
+    
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms">
+                    <label for="terms">I agree to the <a href="#">Terms of Use</a></label>
+                </div>
+    
+                <button type="submit">Create Account</button>
+            </form>
+            <p class="note">Already have an account? <a href="login.html">Log in</a></p>
+        </div>
+    
+        <script>
+            function validateForm() {
+                const terms = document.getElementById('terms');
+                if (!terms.checked) {
+                    alert('You must agree to the Terms of Use before creating an account.');
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </body>
+    </html>

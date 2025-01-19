@@ -4,6 +4,10 @@ video.setAttribute('autoplay', '');
 video.setAttribute('playsinline', '');
 document.body.appendChild(video);
 
+// Apply CSS to mirror the video
+video.style.transform = 'scaleX(-1)';
+video.style.height = 'auto'; // Optional: Maintain aspect ratio
+
 navigator.mediaDevices
   .getUserMedia({ video: true })
   .then((stream) => {
