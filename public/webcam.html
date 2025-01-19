@@ -78,8 +78,18 @@
             border: 2px solid #000; /* Optional border for better visibility */
         }
 
-        canvas {
+        /* canvas {
             margin-top: 20px;
+        } */
+
+        .chart-container {
+            width: 90%; /* Restrict the chart's width */
+            max-width: 1000px; /* Optional maximum width for the chart */
+            margin: 0 auto; /* Center the chart */
+        }
+
+        .posture_analysis {
+            margin-top: 200px;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
@@ -106,8 +116,10 @@
     <!-- Video Element -->
     <video id="webcam" autoplay playsinline></video>
     <!-- Chart -->
-    <h2>Posture Analysis</h2>
-    <canvas id="slouchChart" width="800" height="400"></canvas> <!-- Canvas for the chart -->
+    <h2 class="posture_analysis">Posture Analysis</h2>
+    <div class="chart-container">
+        <canvas id="slouchChart"></canvas>
+    </div>
 
     <script>
         const stickyNote = document.getElementById("sticky-note");
