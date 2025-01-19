@@ -175,6 +175,9 @@ const renderChart = async () => {
       scales: {
         y: {
           beginAtZero: true, // Start Y-axis at 0
+          ticks: {
+            stepSize: 1, // Set the vertical scale to increment by 1
+          },
         },
       },
     },
