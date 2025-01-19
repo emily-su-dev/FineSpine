@@ -19,13 +19,6 @@ body, h1, h2, h3, p {
     font-size: inherit; 
     }
 
-.logotext {
-    font-size: 2.5rem;                                                                 
-    color: darkgreen;
-    font-weight: bold;
-    font-family: "Unbounded", serif;
-    text-align: left;
-    }
 
 .header-container {
     display: flex;
@@ -37,6 +30,36 @@ body, h1, h2, h3, p {
 .btn-group {
     display: flex;
     gap: 10px;
+}
+
+.webcam-btn {
+    font-family: "Raleway", serif;
+    background-color: black;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.webcam-btn:hover {
+    background-color: grey;
+}
+
+.logout-btn {
+    font-family: "Raleway", serif;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.logout-btn:hover {
+    background-color: #f0f0f0;
 }
 
 .login-btn {
@@ -67,14 +90,6 @@ body, h1, h2, h3, p {
 
 .logout-btn:hover {
     background-color: #f0f0f0;
-}
-
-.small-profile {
-    font-size: 12px; /* Adjust text size */
-    line-height: 1.2; /* Adjust line spacing */
-    padding: 5px; /* Add padding inside the div */
-    width: auto; /* Optionally limit the width */
-    max-width: 50px; /* Restrict the max width of the profile area */
 }
 
 #profile-container {

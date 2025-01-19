@@ -21,10 +21,29 @@
             gap: 20px; /* Add spacing between elements */
         }
 
+.sticky-note {
+    width: 200px;
+    height: 150px;
+    background-color: #fdfd96;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    position: absolute;
+    cursor: move;
+    top: 20px; /* Start 20px from the top */
+    left: 20px; /* Start 20px from the left */
+}
+.sticky-note p {
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+}
+
         header {
             position: relative;
             width: 100%;
-            padding: 20px 60px;
+            padding: 50px 60px;
             background-color: transparent;
             text-align: center;
         }
@@ -80,12 +99,40 @@
         <span>High Sensitivity</span>
     </div>
 
+    <div id="sticky-note" class="sticky-note" draggable="true">
+        <p contenteditable="true">View an analysis of your posture during the past few hours!</p>
+    </div>
+
     <!-- Video Element -->
     <video id="webcam" autoplay playsinline></video>
-
     <!-- Chart -->
     <h2>Posture Analysis</h2>
     <canvas id="slouchChart" width="800" height="400"></canvas> <!-- Canvas for the chart -->
+
+    <script>
+        const stickyNote = document.getElementById("sticky-note");
+
+        let offsetX, offsetY;
+
+        stickyNote.addEventListener("dragstart", (e) => {
+            const rect = stickyNote.getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+        });
+
+        document.addEventListener("dragover", (e) => {
+            e.preventDefault();
+        });
+
+        document.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const x = e.clientX - offsetX;
+            const y = e.clientY - offsetY;
+
+            stickyNote.style.left = `${x}px`;
+            stickyNote.style.top = `${y}px`;
+        });
+    </script>
 
     <!-- TensorFlow and App Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
