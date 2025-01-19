@@ -19,15 +19,6 @@ body, h1, h2, h3, p {
     font-size: inherit; 
     }
 
-
-
-
-#profile:hover {
-  transform: scale(1.1);
-  color: #ff69b4; /* Changes text color to pink on hover */
-}
-
-
 .logotext {
     font-size: 2.5rem;                                                                 
     color: darkgreen;
@@ -46,6 +37,36 @@ body, h1, h2, h3, p {
 .btn-group {
     display: flex;
     gap: 10px;
+}
+
+.webcam-btn {
+    font-family: "Raleway", serif;
+    background-color: black;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.webcam-btn:hover {
+    background-color: grey;
+}
+
+.logout-btn {
+    font-family: "Raleway", serif;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.logout-btn:hover {
+    background-color: #f0f0f0;
 }
 
 .login-btn {
@@ -76,6 +97,25 @@ body, h1, h2, h3, p {
 
 .logout-btn:hover {
     background-color: #f0f0f0;
+}
+
+#profile-container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    justify-content: flex-end; /* Align items to the right */
+    gap: 10px; /* Add space between profile and button */
+}
+
+#profile-pic {
+    width: 40px; /* Adjust size of the profile picture */
+    height: 40px; /* Ensure it's a square */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure the image scales nicely */
+}
+
+#profile {
+    font-size: 14px; /* Adjust size of profile text */
+    font-weight: bold;
 }
 
 
