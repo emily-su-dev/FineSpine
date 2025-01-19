@@ -1,82 +1,63 @@
-// Create Auth0 client 
-auth0.createAuth0Client({
+  auth0.createAuth0Client({
     domain: "dev-4og5oz66ye0htgcp.us.auth0.com",
-    clientId: "BpDLWPnET9va689Hnl6XSpOBM1SwKC14",
+    clientId: "8eiVih22aP4UxXgvtowtnjgTlFdjavNs",
     authorizationParams: {
       redirect_uri: window.location.origin
     }
   }).then(async (auth0Client) => {
     // Assumes a button with id "login" in the DOM
-    const loginButton = document.querySelector(".login-btn");
-  
+    const loginButton = document.getElementById("login");
+    const logoutButton = document.getElementById("logout");
+    const getStartedButton = document.getElementById("start");
+    const camButton = document.getElementById("webcam"); 
+    const profileElement = document.getElementById("profile");
+
     loginButton.addEventListener("click", (e) => {
       e.preventDefault();
       auth0Client.loginWithRedirect();
     });
-  
-    // Assumes a button with id "start" in the DOM
-    const getStartedButton = document.querySelector(".login-btn");
-  
+
+    logoutButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      auth0Client.logout({
+        returnTo: window.location.origin // Redirect to home after logout
+      });
+    });
+
     getStartedButton.addEventListener("click", (e) => {
       e.preventDefault();
       auth0Client.loginWithRedirect();
     });
 
+    // Handle redirect callback if applicable
     if (location.search.includes("state=") && 
         (location.search.includes("code=") || 
         location.search.includes("error="))) {
       await auth0Client.handleRedirectCallback();
       window.history.replaceState({}, document.title, "/");
     }
-  
-    // Assumes a button with id "logout" in the DOM
-    // Use if logout button differs from login 
 
-    const logoutButton = document.getElementById("logout");
-  
-    logoutButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      auth0Client.logout();
-    });
-  
     const isAuthenticated = await auth0Client.isAuthenticated();
-    const userProfile = await auth0Client.getUser();
-  
-    // Assumes an element with id "profile" in the DOM
-    const profileElement = document.getElementById("profile");
-  
+    const userProfile = isAuthenticated ? await auth0Client.getUser() : null;
+
+    // Conditionally render buttons and profile
     if (isAuthenticated) {
-        // Update button to "Log Out"
-        // Use if login button is same as logout button 
+      loginButton.style.display = "none"; // Hide login button
+      logoutButton.style.display = "block"; // Show logout button
+      getStartedButton.style.display = "none"; // Hide get started button 
+      camButton.style.display = "block"; // Show webcam page redirect button 
 
-        // loginButton.innerText = "Log Out";
-        // loginButton.onclick = async (e) => {
-        //     e.preventDefault();
-        //     await auth0Client.logout();
-        // }; 
+      profileElement.style.display = "block";
+      profileElement.innerHTML = `
+        <p>${userProfile.name}</p>
+        <img src="${userProfile.picture}" />
+      `;
+    } else {
+      loginButton.style.display = "block"; // Show login button
+      logoutButton.style.display = "none"; // Hide logout button
+      getStartedButton.style.display = "block"; // Show get started button 
+      camButton.style.display = "none"; // Hide webcam page redirect button 
 
-        // Toggle login/logout button?
-        loginButton.style.display = "none";
-        logoutButton.style.display = "block";
-        getStartedButton.style.display = "none";
-
-        // Richer user profile interface 
-        profileElement.style.display = "block";
-        profileElement.innerHTML = `
-              <p>${userProfile.name}</p>
-              <img src="${userProfile.picture}" />
-            `;
-    } else {  
-        // loginButton.innerText = "Log In";
-        // loginButton.onclick = async (e) => {
-        //     e.preventDefault();
-        //     await auth0Client.loginWithRedirect();
-        // };
-
-        loginButton.style.display = "block";
-        logoutButton.style.display = "none";
-        getStartedButton.style.display = "block";
-
-        profileElement.style.display = "none";
+      profileElement.style.display = "none";
     }
   });

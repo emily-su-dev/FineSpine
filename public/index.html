@@ -14,12 +14,10 @@
     <header>
         <div class="container header-container">
             <h1 class="logo">FineSpine</h1>
-            <button onclick="location.href='webcam.html'" class="webcam-btn">Webcam</button>
+            <button onclick="location.href='webcam.html'" class="webcam-btn" id="webcam">Webcam</button>
 
-            <div class="btn-group">
-                <button class="login-btn" id="login">Log In</button>
-                <button class="logout-btn" id="logout">Log Out</button>
-            </div>
+            <button class="login-btn" id="login">Log In</button>
+            <button class="logout-btn" id="logout">Log Out</button>
         </div>
     </header>
 
@@ -31,9 +29,14 @@
             <br>
             <br>
             <p>Your AI-powered posture coach for a healthier, productive life</p>
-            <button class="login-btn get-started-btn" id="start">Get Started</button>
+            <button class="get-started-btn" id="start">Get Started</button>
         </div>
         
+        <!-- placeholder for profile div -->
+        <div id="profile" style="display: none;">
+            <!-- User profile info will be dynamically inserted here -->
+        </div>
+          
         <div class="right-content">
             <div class="placeholder">
                 <p>Insert demo video</p>

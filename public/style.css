@@ -69,6 +69,25 @@ body, h1, h2, h3, p {
     background-color: #f0f0f0;
 }
 
+.get-started-btn {
+    font-family: "Raleway", serif;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 30px;
+}
+
+.get-started-btn:hover {
+    background-color: darkgreen;
+}
+
 .container {
     margin: 0 auto;
     padding: 40px 60px;
@@ -106,26 +125,6 @@ body, h1, h2, h3, p {
 .left-content p {
     font-size: 1.1rem;
 }
-
-.get-started-btn {
-    font-family: "Raleway", serif;
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 30px;
-}
-
-.get-started-btn:hover {
-    background-color: darkgreen;
-}
-
 
 /* Right Content */
 .right-content {
