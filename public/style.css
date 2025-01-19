@@ -69,6 +69,33 @@ body, h1, h2, h3, p {
     background-color: #f0f0f0;
 }
 
+.small-profile {
+    font-size: 12px; /* Adjust text size */
+    line-height: 1.2; /* Adjust line spacing */
+    padding: 5px; /* Add padding inside the div */
+    width: auto; /* Optionally limit the width */
+    max-width: 50px; /* Restrict the max width of the profile area */
+}
+
+#profile-container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    justify-content: flex-end; /* Align items to the right */
+    gap: 10px; /* Add space between profile and button */
+}
+
+#profile-pic {
+    width: 40px; /* Adjust size of the profile picture */
+    height: 40px; /* Ensure it's a square */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure the image scales nicely */
+}
+
+#profile {
+    font-size: 14px; /* Adjust size of profile text */
+    font-weight: bold;
+}
+
 .get-started-btn {
     font-family: "Raleway", serif;
     margin-top: 20px;
