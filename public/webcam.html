@@ -36,6 +36,12 @@
             font-family: "Unbounded", serif;
         }
 
+        .logo a {
+            text-decoration: none; 
+            color: inherit; 
+            font-size: inherit; 
+        }
+
         video {
             transform: scaleX(-1); /* Mirror the webcam video */
             max-width: 80%; /* Limit the width */
@@ -49,9 +55,12 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
 </head>
-<body>
     <header>
-        <h1 class="logo">FineSpine</h1>
+        <div class="container header-container">
+            <h1 class="logo">
+                <a href="index.html">FineSpine</a>
+            </h1>
+        </div>
     </header>
 
     <label for="threshold-slider">Sensitivity:</label>
