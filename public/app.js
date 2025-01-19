@@ -78,29 +78,6 @@ navigator.mediaDevices
 
 const timeIntervals = 10000;
 
-// setInterval(() => {
-//     // Mock detection logic (replace with actual analysis later)
-//     const slouching = Math.random() > 0.5; // Simulate random slouching detection
-
-//     if (slouching) {
-//         console.log('You are slouching! Sit up straight!');
-//         alert('You are slouching! Sit up straight!');
-//     }
-// }, timeIntervals);
-
-// const postureHistory = []; // To store posture data
-
-// setInterval(() => {
-//     const timestamp = new Date().toLocaleTimeString();
-//     const slouching = Math.random() > 0.5;
-
-//     postureHistory.push({ timestamp, slouching });
-
-//     console.log(postureHistory);
-// }, timeIntervals);
-
-
-
 let detector;
 
 const loadModel = async () => {
@@ -126,6 +103,11 @@ const detectPose = async () => {
 
 video.addEventListener('loadeddata', detectPose); // Start detection when the video is ready
 
+// Create an audio element for the alert sound
+const alertSound = new Audio('./slouch_alert.wav'); // Replace with your sound file URL
+
+let isSlouching = false; // Track the user's posture state
+
 const analyzePosture = (keypoints) => {
   const nose = keypoints.find((k) => k.name === 'nose');
   const leftShoulder = keypoints.find((k) => k.name === 'left_shoulder');
@@ -134,11 +116,34 @@ const analyzePosture = (keypoints) => {
   // Calculate average shoulder height
   const avgShoulderY = (leftShoulder.y + rightShoulder.y) / 2;
 
-  // Check if nose is significantly lower than shoulders (indicating slouching)
-  if (nose.y > avgShoulderY + 50) { // Adjust the threshold as needed
-    console.log('Slouching detected!');
-    alert('You are slouching! Sit up straight.');
+  // Check if the nose is significantly lower than shoulders (indicating slouching)
+  if (nose.y > avgShoulderY + 40) { // Adjust threshold as needed
+    if (!isSlouching) {
+      isSlouching = true; // Update state
+      console.log('Slouching detected!');
+      
+      // Play the alert sound
+      alertSound.play().catch((err) => console.error('Error playing sound:', err));
+
+      // Show an alert box
+      alert('You are slouching! Sit up straight.');
+    }
   } else {
-    console.log('Good posture!');
+    if (isSlouching) {
+      isSlouching = false; // Reset state
+      console.log('Good posture detected!');
+    }
   }
 };
+
+
+// const postureHistory = []; // To store posture data
+
+// setInterval(() => {
+//     const timestamp = new Date().toLocaleTimeString();
+//     const slouching = Math.random() > 0.5;
+
+//     postureHistory.push({ timestamp, slouching });
+
+//     console.log(postureHistory);
+// }, timeIntervals);
