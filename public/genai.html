@@ -1,0 +1,29 @@
+<div id="chat-container">
+    <div id="messages"></div>
+    <input type="text" id="userMessage" placeholder="Ask about posture or back pain..." />
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+async function sendMessage() {
+    const userMessage = document.getElementById('userMessage').value;
+
+    const response = await fetch('/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: userMessage })
+    });
+
+    const data = await response.json();
+    displayMessage(data.reply);
+}
+
+function displayMessage(message) {
+    const messagesContainer = document.getElementById('messages');
+    const newMessage = document.createElement('div');
+    newMessage.innerText = message;
+    messagesContainer.appendChild(newMessage);
+}
+</script>
