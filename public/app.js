@@ -38,6 +38,78 @@ const loadModel = async () => {
 
 loadModel();
 
+// Create an audio element for the alert sound
+const alertSound = new Audio('./slouch_alert.wav'); // Replace with your sound file URL
+
+let isSlouching = false; // Track the user's posture state
+let slouchLog = []
+
+const sendLogToServer = async (timestamp) => {
+  try {
+    const response = await fetch('http://localhost:3000/log', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ timestamp }),
+    });
+
+    if (response.ok) {
+      console.log('Log sent to server successfully');
+    } else {
+      console.error('Error sending log to server:', response.statusText);
+    }
+  } catch (err) {
+    console.error('Error connecting to server:', err);
+  }
+};
+
+let thresholdPercentage = 50; // Default slider value (percentage)
+let thresholdPixels = 0 + (thresholdPercentage / 100) * 150; // Convert to 20-80 pixels range
+
+const slider = document.getElementById('threshold-slider');
+const thresholdDisplay = document.getElementById('threshold-display');
+
+// Update threshold value when slider changes
+slider.addEventListener('input', (event) => {
+  thresholdPercentage = 100 - parseInt(event.target.value); // Slider value (0-100)
+  
+  // Map slider percentage (0-100) to pixel range (20-80)
+  thresholdPixels = 0 + (thresholdPercentage / 100) * 150;
+
+  // Update display
+  thresholdDisplay.textContent = `${Math.round(thresholdPixels)} pixels`;
+  console.log(`Threshold updated to: ${Math.round(thresholdPixels)} pixels`);
+});
+
+const analyzePosture = (keypoints) => {
+  const nose = keypoints.find((k) => k.name === 'nose');
+  const leftShoulder = keypoints.find((k) => k.name === 'left_shoulder');
+  const rightShoulder = keypoints.find((k) => k.name === 'right_shoulder');
+
+  const avgShoulderY = (leftShoulder.y + rightShoulder.y) / 2;
+
+  if (nose.y > avgShoulderY + thresholdPixels) {
+    if (!isSlouching) {
+      isSlouching = true;
+      const timestamp = new Date().toISOString();
+      slouchLog.push(timestamp);
+      console.log('Slouching detected at:', timestamp);
+      
+      // Send log to server
+      sendLogToServer(timestamp);
+
+      alertSound.play().catch((err) => console.error('Error playing sound:', err));
+      alert('You are slouching! Sit up straight.');
+    }
+  } else {
+    if (isSlouching) {
+      isSlouching = false;
+      console.log('Good posture detected!');
+    }
+  }
+};
+
 const detectPose = async () => {
   if (detector && video.readyState === 4) {
     const poses = await detector.estimatePoses(video);
@@ -53,48 +125,3 @@ const detectPose = async () => {
 };
 
 video.addEventListener('loadeddata', detectPose); // Start detection when the video is ready
-
-// Create an audio element for the alert sound
-const alertSound = new Audio('./slouch_alert.wav'); // Replace with your sound file URL
-
-let isSlouching = false; // Track the user's posture state
-
-const analyzePosture = (keypoints) => {
-  const nose = keypoints.find((k) => k.name === 'nose');
-  const leftShoulder = keypoints.find((k) => k.name === 'left_shoulder');
-  const rightShoulder = keypoints.find((k) => k.name === 'right_shoulder');
-
-  // Calculate average shoulder height
-  const avgShoulderY = (leftShoulder.y + rightShoulder.y) / 2;
-
-  // Check if the nose is significantly lower than shoulders (indicating slouching)
-  if (nose.y > avgShoulderY + 40) { // Adjust threshold as needed
-    if (!isSlouching) {
-      isSlouching = true; // Update state
-      console.log('Slouching detected!');
-      
-      // Play the alert sound
-      alertSound.play().catch((err) => console.error('Error playing sound:', err));
-
-      // Show an alert box
-      alert('You are slouching! Sit up straight.');
-    }
-  } else {
-    if (isSlouching) {
-      isSlouching = false; // Reset state
-      console.log('Good posture detected!');
-    }
-  }
-};
-
-
-// const postureHistory = []; // To store posture data
-
-// setInterval(() => {
-//     const timestamp = new Date().toLocaleTimeString();
-//     const slouching = Math.random() > 0.5;
-
-//     postureHistory.push({ timestamp, slouching });
-
-//     console.log(postureHistory);
-// }, timeIntervals);

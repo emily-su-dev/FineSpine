@@ -56,13 +56,19 @@
                 </h1>
             </div>
         </header>
-
     
-        
-            <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
-    <script type="module" src="app.js"></script>
+        <label for="threshold-slider">Sensitivity:</label>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span>Low Sensitivity</span>
+            <input type="range" id="threshold-slider" min="0" max="100" value="50" style="flex-grow: 1; margin: 0 10px;">
+            <span>High Sensitivity</span>
+        </div>
+        <!-- <span>Current Threshold: <span id="threshold-display">20 pixels</span></span> -->
+
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+        <script type="module" src="app.js"></script>
     
     </body>
     </html>
