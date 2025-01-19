@@ -68,6 +68,10 @@
             max-width: 1000px; /* Optional maximum width for the chart */
             margin: 0 auto; /* Center the chart */
         }
+
+        .posture_analysis {
+            margin-top: 200px;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
 </head>
@@ -90,7 +94,7 @@
     <video id="webcam" autoplay playsinline></video>
 
     <!-- Chart -->
-    <h2>Posture Analysis</h2>
+    <h2 class="posture_analysis">Posture Analysis</h2>
     <div class="chart-container">
         <canvas id="slouchChart"></canvas>
     </div>
