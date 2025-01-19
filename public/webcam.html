@@ -8,61 +8,70 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-        <title>Sign Up</title>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-                font-family: "Raleway", serif;
-                background: #f9f9f9;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-
-            header {
-            position: absolute; 
-            top: 0;
-            left: 0;
-            width: 100%; 
+    <title>Posture Analysis</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Raleway", serif;
+            background: #f9f9f9;
             display: flex;
-            align-items: flex-start; 
-            padding: 35px 60px;
-            background-color: transparent; 
-            }
+            flex-direction: column; /* Align elements vertically */
+            align-items: center; /* Center horizontally */
+            gap: 20px; /* Add spacing between elements */
+        }
 
-            .logo {
-            font-size: 0.9rem;
+        header {
+            position: relative;
+            width: 100%;
+            padding: 20px 60px;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
             color: black;
             font-weight: bold;
             font-family: "Unbounded", serif;
-            text-align: left;
-            }
+        }
 
-            .logo a {
-            text-decoration: none; 
-            color: inherit; 
-            font-size: inherit; 
-            }
-            
-        </style>
-    </head>
-    <body>
-        <header>
-            <div class="container header-container">
-                <h1 class="logo">
-                    <a href="index.html">FineSpine</a>
-                </h1>
-            </div>
-        </header>
+        video {
+            transform: scaleX(-1); /* Mirror the webcam video */
+            max-width: 80%; /* Limit the width */
+            height: auto; /* Maintain aspect ratio */
+            border: 2px solid #000; /* Optional border for better visibility */
+        }
 
-    
-        
-            <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+</head>
+<body>
+    <header>
+        <h1 class="logo">FineSpine</h1>
+    </header>
+
+    <label for="threshold-slider">Sensitivity:</label>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <span>Low Sensitivity</span>
+        <input type="range" id="threshold-slider" min="0" max="100" value="50" style="flex-grow: 1; margin: 0 10px;">
+        <span>High Sensitivity</span>
+    </div>
+
+    <!-- Video Element -->
+    <video id="webcam" autoplay playsinline></video>
+
+    <!-- Chart -->
+    <h2>Posture Analysis</h2>
+    <canvas id="slouchChart" width="800" height="400"></canvas> <!-- Canvas for the chart -->
+
+    <!-- TensorFlow and App Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
     <script type="module" src="app.js"></script>
-    
-    </body>
-    </html>
+</body>
+</html>
