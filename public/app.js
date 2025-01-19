@@ -1,14 +1,7 @@
 // Video display and posture checking page 
 
 // No imports needed; modules are loaded globally
-const video = document.createElement('video');
-video.setAttribute('autoplay', '');
-video.setAttribute('playsinline', '');
-document.body.appendChild(video);
-
-// Apply CSS to mirror the video
-video.style.transform = 'scaleX(-1)';
-video.style.height = 'auto'; // Optional: Maintain aspect ratio
+const video = document.getElementById('webcam');
 
 navigator.mediaDevices
   .getUserMedia({ video: true })
@@ -28,6 +21,19 @@ navigator.mediaDevices
   .catch((err) => console.error('Error accessing webcam:', err));
 
 const timeIntervals = 10000;
+
+const getEasternTime = () => {
+  const now = new Date();
+
+  // Get UTC time
+  const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;
+
+  // Offset for Eastern Standard Time (EST)
+  const offset = -5; // EST is UTC-5
+  const easternTime = new Date(utcTime + offset * 3600000);
+
+  return easternTime.toLocaleString("en-US", { timeZone: "America/New_York" });  // Adjust format as needed
+};
 
 let detector;
 
@@ -92,7 +98,7 @@ const analyzePosture = (keypoints) => {
   if (nose.y > avgShoulderY + thresholdPixels) {
     if (!isSlouching) {
       isSlouching = true;
-      const timestamp = new Date().toISOString();
+      const timestamp = getEasternTime();
       slouchLog.push(timestamp);
       console.log('Slouching detected at:', timestamp);
       
@@ -125,3 +131,56 @@ const detectPose = async () => {
 };
 
 video.addEventListener('loadeddata', detectPose); // Start detection when the video is ready
+
+const fetchHourlyData = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/logs/hourly');
+    if (response.ok) {
+      return await response.json(); // Get hourly data (array of 24 numbers)
+    } else {
+      console.error('Error fetching hourly data:', response.statusText);
+    }
+  } catch (err) {
+    console.error('Error connecting to server:', err);
+  }
+};
+
+// Render the chart
+const renderChart = async () => {
+  const hourlyData = await fetchHourlyData();
+
+  // Generate labels for the past 24 hours
+  const now = new Date();
+  const labels = Array.from({ length: 24 }, (_, i) => {
+    const hour = (now.getHours() - i + 24) % 24; // Handle wrap-around for hours
+    return `${hour}:00`;
+  }).reverse();
+
+  // Create the Chart.js bar chart
+  const ctx = document.getElementById('slouchChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels, // Labels for hours
+      datasets: [{
+        label: 'Slouches per Hour',
+        data: hourlyData, // Data fetched from the backend
+        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Bar color
+        borderColor: 'rgba(75, 192, 192, 1)', // Border color
+        borderWidth: 1,
+      }],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true, // Start Y-axis at 0
+        },
+      },
+    },
+  });
+};
+
+// Call renderChart on page load
+renderChart();
+

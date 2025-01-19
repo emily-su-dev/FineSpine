@@ -47,6 +47,36 @@ app.get('/logs', async (req, res) => {
   }
 });
 
+app.get('/logs/hourly', async (req, res) => {
+  try {
+    const logs = await SlouchLog.find();
+
+    // Initialize an array for 24 hours, all set to 0
+    const hourlyData = Array(24).fill(0);
+
+    // Get the current time in EST
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    logs.forEach((log) => {
+      const logTime = new Date(log.timestamp);
+
+      // Calculate the difference in hours
+      const hourDifference = (currentHour - logTime.getHours() + 24) % 24;
+
+      // Only include logs within the past 24 hours
+      if (hourDifference < 24) {
+        hourlyData[23 - hourDifference]++; // Fill the corresponding hour
+      }
+    });
+
+    res.status(200).json(hourlyData);
+  } catch (err) {
+    res.status(500).send('Error retrieving logs:', err);
+  }
+});
+
+
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
