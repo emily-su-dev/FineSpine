@@ -11,7 +11,6 @@
     const getStartedButton = document.getElementById("start");
     const camButton = document.getElementById("webcam"); 
     const chatButton = document.getElementById("chat"); 
-    const profileElement = document.getElementById("profile");
 
     loginButton.addEventListener("click", (e) => {
       e.preventDefault();
@@ -39,7 +38,6 @@
     }
 
     const isAuthenticated = await auth0Client.isAuthenticated();
-    const userProfile = isAuthenticated ? await auth0Client.getUser() : null;
 
     // Conditionally render buttons and profile
     if (isAuthenticated) {
@@ -48,19 +46,11 @@
       getStartedButton.style.display = "none"; // Hide get started button 
       camButton.style.display = "block"; // Show webcam page redirect button 
       chatButton.style.display = "block"; // Show chat bot page redirect button 
-
-      profileElement.style.display = "block";
-      profileElement.innerHTML = `
-        <p>${userProfile.name}</p>
-        <img src="${userProfile.picture}" />
-      `;
     } else {
       loginButton.style.display = "block"; // Show login button
       logoutButton.style.display = "none"; // Hide logout button
       getStartedButton.style.display = "block"; // Show get started button 
       camButton.style.display = "none"; // Hide webcam page redirect button 
       chatButton.style.display = "none"; // Show chat bot page redirect button 
-
-      profileElement.style.display = "none";
     }
   });
