@@ -13,9 +13,7 @@
 
     loginButton.addEventListener("click", (e) => {
       e.preventDefault();
-      auth0Client.loginWithRedirect({
-        redirect_uri: "http://localhost:3000/webcam.html"
-      });
+      auth0Client.loginWithRedirect();
     });
 
     logoutButton.addEventListener("click", (e) => {
@@ -27,9 +25,7 @@
 
     getStartedButton.addEventListener("click", (e) => {
       e.preventDefault();
-      auth0Client.loginWithRedirect({
-        redirect_uri: "http://localhost:3000/webcam.html"
-      });
+      auth0Client.loginWithRedirect();
     });
 
     // Handle redirect callback if applicable
